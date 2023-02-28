@@ -1,0 +1,14 @@
+@using App.Models;
+@model ProductModel;
+
+@{
+    Layout = "_layout";
+    var product=ViewBag.product as ProductModel;
+}
+<nav class="navbar navbar-expand-lg bg-danger">
+    <div class="container-fluid">
+        <p>@product.id</p>
+        <p>@product.name</p>
+        <p>@product.price</p>
+    </div>
+</nav>
