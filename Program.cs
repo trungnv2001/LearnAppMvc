@@ -1,12 +1,14 @@
 using App.Sevice;
 using  Microsoft.AspNetCore.Mvc.Razor;
+using App.Extendmethors;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-
+builder.Services.AddSingleton<PlanetSevice>();
 builder.Services.Configure<RazorViewEngineOptions>(option => {
     //{0}-ten action {1}-ten controller -{2}-ten area
 
@@ -31,6 +33,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.AddStatusCodepage();
+
 app.UseRouting();
 
 app.UseAuthentication();//xác thực danh tính
@@ -41,9 +45,19 @@ app.UseAuthorization();//xác thực quyền truy cập
 //khi truy cập vào địa chỉ url = home/index thì sẽ khởi tạo một đối tượng
 // có tên là home, chính là lớp Home có hậu tố là controller 
 //và rồi thực hiện phương thức index. 
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// app.MapAreaControllerRoute();
+// app.MapControllerRoute();
+// app.MapControllers();
+// app.MapDefaultControllerRoute();
+
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    name:"default",
+    pattern:"/{controller=Home}/{action=Index}/{id?}"
+);
 
 app.MapRazorPages();
 app.Run();

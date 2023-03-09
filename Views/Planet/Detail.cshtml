@@ -1,0 +1,17 @@
+@model App.Models.PlanetModel;
+
+<h1>@Model.Name</h1>
+<div class="card w-50">
+    <h4>@Model.VnName</h2>
+    @if(@Model.Name=="Mars")
+    {
+        <img src="~/planet/@(Model.Name).png" alt="">
+    }
+    <img src="~/planet/@(Model.Name).jpg" alt="">
+    <div class="card-body">
+        <div class="card-text">
+            @Model.Content
+        </div>
+        <a class="card-link" asp-action="Index">Danh sách các hành tinh</a>
+    </div>
+</div>
